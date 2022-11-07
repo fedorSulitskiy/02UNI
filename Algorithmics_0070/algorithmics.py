@@ -333,12 +333,12 @@ def BinSearch(Array,x,demonstrate=False):
             if demonstrate:
                 print(Array,'-->',Array[:half],' + ',Array[half:])
                 print('LEFT',Array[:half],'\n')
-            return BinSearch(Array[:half],x)
+            return BinSearch(Array[:half],x,True)
         else:
             if demonstrate:
                 print(Array,'-->',Array[:half],' + ',Array[half:])
                 print('RIGHT',Array[half:],'\n')
-            return BinSearch(Array[half:],x)
+            return BinSearch(Array[half:],x,True)
     else:
         return Array[0]
 
@@ -347,7 +347,7 @@ def MergeSort(Array,demonstrate=False):
     
     if demonstrate:
         print('DIVIDE')
-        print(a)
+        print(Array)
     
     def conquer(a,b):
         ac = 0
@@ -369,8 +369,8 @@ def MergeSort(Array,demonstrate=False):
         return lst
 
     def divide(Array):
-        if len(Array) == 1:
-            return [Array]
+        #if len(Array) == 1: # I believe this is non-essential but I'll leave it here
+            #return [Array]
         half = int(round(len(Array)/2))
         a = Array[:half]
         b = Array[half:] 
@@ -381,8 +381,10 @@ def MergeSort(Array,demonstrate=False):
     if demonstrate:
         print(a)
 
-    while len(a) != len(b):
+    while len(a) != len(Array):
         for i in a:
+            if len(i)==1:
+                continue
             a = a + divide(i)
             a.remove(i)
             print(a)
@@ -399,3 +401,8 @@ def MergeSort(Array,demonstrate=False):
             print(a)
             
     return a[0]
+
+# ref - s.111
+def QuickSort(Array):
+    # easy conceptually but impossible when trying to program literally
+    pass
