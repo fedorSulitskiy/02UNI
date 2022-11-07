@@ -343,5 +343,59 @@ def BinSearch(Array,x,demonstrate=False):
         return Array[0]
 
 # ref - s.105
-def MergeSort(Array):
-    pass
+def MergeSort(Array,demonstrate=False):
+    
+    if demonstrate:
+        print('DIVIDE')
+        print(a)
+    
+    def conquer(a,b):
+        ac = 0
+        bc = 0
+        lst =[]
+        for i in range(len(a)+len(b)):
+            if ac < len(a) and bc < len(b):
+                if a[ac] <= b[bc]:
+                    lst.append(a[ac])
+                    ac += 1
+                else:
+                    lst.append(b[bc])
+                    bc += 1
+            else:
+                if ac == len(a):
+                    lst = lst + [i for i in b if i not in lst]
+                else:
+                    lst = lst + [i for i in a if i not in lst]
+        return lst
+
+    def divide(Array):
+        if len(Array) == 1:
+            return [Array]
+        half = int(round(len(Array)/2))
+        a = Array[:half]
+        b = Array[half:] 
+        return [a,b]
+
+    a = divide(Array)
+    
+    if demonstrate:
+        print(a)
+
+    while len(a) != len(b):
+        for i in a:
+            a = a + divide(i)
+            a.remove(i)
+            print(a)
+    if demonstrate:
+        print('& CONQUER')
+
+    while len(a)!=1:
+        x = a[0]
+        y = a[1]
+        a += [conquer(x,y)]
+        a.remove(x)
+        a.remove(y)
+        if demonstrate:
+            print(a)
+            
+    return a[0]
