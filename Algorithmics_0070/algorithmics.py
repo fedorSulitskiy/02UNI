@@ -406,3 +406,37 @@ def MergeSort(Array,demonstrate=False):
 def QuickSort(Array):
     # easy conceptually but impossible when trying to program literally
     pass
+
+# ref - s.132
+def BC(n,k):
+    '''
+    BC = Binomial Coefficient
+    The number of ways of picking k items from n items, calculated recursively.
+    '''
+    if k == 0 or k == n:
+        return 1
+    else:
+        return BC(n-1,k-1) + BC(n-1,k)
+
+# ref - s.137
+def Floyd(Array):
+    '''
+    Calculate the length (cost,weight) of a shortest path between
+    each pair of nodes.
+
+    > For Floyd's algorithm, assume problem has optimal
+    substructure:
+        if j is on a shortest path from i to k, then a shortest path from
+        i to j and a shortest path from j to k can be composed for a
+        shortest path from i to k.
+
+    Takes in an adjacency matrix with only direct paths and returns optimised adjacency matrix with intermediate
+    paths taken into account.
+    '''
+    D = Array
+    for k in range(len(Array)):
+        for i in range(len(Array)):
+            for j in range(len(Array)):
+                D[i][j] = min(D[i][j],D[i][k] + D[k][j])
+    return D
+
